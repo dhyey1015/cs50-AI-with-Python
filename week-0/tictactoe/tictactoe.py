@@ -78,9 +78,9 @@ def winner(board):
         return board[0][0]                           #[EMPTY, EMPTY, EMPTY] checking this case to avoid index error
     
     if board[0][2] == board[1][1] == board[2][0] and board[0][2] is not EMPTY:
-        return board[0][2] 
+        return board[0][2]                           #[EMPTY, EMPTY, EMPTY] checking this case to avoid index error  
     
-    return None                          #[EMPTY, EMPTY, EMPTY] checking this case to avoid index error       
+    return None                         
 
 def terminal(board):
     """
