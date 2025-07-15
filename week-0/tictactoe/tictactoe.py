@@ -109,9 +109,50 @@ def utility(board):
     else:
         return 0
 
+def min_value(board):
+    if terminal(board):
+        return utility(board)
+    
+    min_value = math.inf
+    for action in actions(board):
+        value = max_value(result(board, action))
+        min_value = min(min_value, value)
+
+    return min_value
+
+def max_value(board):
+
+    if terminal(board):
+        return utility(board)
+    
+    max_value = -math.inf
+    for action in actions(board):
+        value = min_value(result(board, action))
+        max_value = max(max_value, value)
+    
+    return max_value
 
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+    if terminal(board):
+        return None
+
+    elif player(board) == X:
+        plays = []
+        for action in actions(board):
+            plays.append([min_value(result(board, action)), action])
+ 
+        return sorted(plays, key=lambda x: x[0], reverse=True)[0][1]
+
+    elif player(board) == O:
+        plays = []
+        for action in actions(board):
+            plays.append([max_value(result(board, action)), action])
+
+        return sorted(plays, key=lambda x: x[0])[0][1] 
+    
     raise NotImplementedError
+
+
